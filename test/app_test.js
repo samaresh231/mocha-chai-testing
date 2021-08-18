@@ -1,12 +1,22 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const {arr, app}= require('../app');
+let {arr, app}= require('../app');
 
 const {expect} = chai;
 
 chai.use(chaiHttp);
 
 describe('Testing book apis', () => {
+    beforeEach(done => {
+        arr = []
+        arr.push({
+            name: "Samaresh",
+            year: 1932,
+            id: 0
+        })
+        done();
+    })
+
     it('testing GET /books api', (done) => {
         chai.request(app)
             .get('/books')
